@@ -12,15 +12,14 @@ import java.util.Map;
  * <p>
  * it's not ThreadSafe.
  */
-class SharedPrefStringRepository implements StringRepository {
+class SharedPrefStringRepository extends ResourceRepository implements StringRepository {
     private static final String SHARED_PREF_NAME = "Restrings";
 
     private SharedPreferences sharedPreferences;
     private StringRepository memoryStringRepository = new MemoryStringRepository();
 
     SharedPrefStringRepository(Context context) {
-        initSharedPreferences(context);
-        loadStrings();
+        super(context);
     }
 
     @Override
@@ -48,13 +47,15 @@ class SharedPrefStringRepository implements StringRepository {
         return memoryStringRepository.getStrings(language);
     }
 
-    private void initSharedPreferences(Context context) {
+    @Override
+    void initSharedPreferences(Context context) {
         if (sharedPreferences == null) {
             sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         }
     }
 
-    private void loadStrings() {
+    @Override
+    void loadResources() {
         Map<String, ?> strings = sharedPreferences.getAll();
         for (Map.Entry<String, ?> entry : strings.entrySet()) {
             if (!(entry.getValue() instanceof String)) {
@@ -75,7 +76,8 @@ class SharedPrefStringRepository implements StringRepository {
                 .apply();
     }
 
-    private Map<String, String> deserializeKeyValues(String content) {
+    @Override
+    Map<String, String> deserializeKeyValues(String content) {
         Map<String, String> keyValues = new LinkedHashMap<>();
         String[] items = content.split(",");
         for (String item : items) {
@@ -85,7 +87,8 @@ class SharedPrefStringRepository implements StringRepository {
         return keyValues;
     }
 
-    private String serializeKeyValues(Map<String, String> keyValues) {
+    @Override
+    String serializeKeyValues(Map<String, String> keyValues) {
         StringBuilder content = new StringBuilder();
         for (Map.Entry<String, String> item : keyValues.entrySet()) {
             content.append(item.getKey())

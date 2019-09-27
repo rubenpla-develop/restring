@@ -25,8 +25,9 @@ public class SampleStringsLoader implements Restring.StringsLoader {
         Map<String, String> map = new HashMap<>();
         switch (language) {
             case "en": {
-                map.put("title", "This is title (from restring).");
-                map.put("subtitle", "This is subtitle (from restring).");
+                map.put("title", "This is title from MD(from restring).");
+                map.put("subtitle", "This is subtitle from MD (from restring).");
+                map.put("subtitle2", "Lorem Isum abracadabra pata de cabra");
                 break;
             }
             case "de": {

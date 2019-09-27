@@ -7,6 +7,7 @@ public class RestringConfig {
 
     private boolean persist;
     private Restring.StringsLoader stringsLoader;
+    private Restring.ColorLoader colorLoader;
 
     public boolean isPersist() {
         return persist;
@@ -16,12 +17,17 @@ public class RestringConfig {
         return stringsLoader;
     }
 
+    public Restring.ColorLoader getColorLoader() {
+        return colorLoader;
+    }
+
     private RestringConfig() {
     }
 
     public static class Builder {
         private boolean persist;
         private Restring.StringsLoader stringsLoader;
+        private Restring.ColorLoader colorLoader;
 
         public Builder persist(boolean persist) {
             this.persist = persist;
@@ -33,10 +39,16 @@ public class RestringConfig {
             return this;
         }
 
+        public Builder colorLoader(Restring.ColorLoader loader) {
+            this.colorLoader = loader;
+            return this;
+        }
+
         public RestringConfig build() {
             RestringConfig config = new RestringConfig();
             config.persist = persist;
             config.stringsLoader = stringsLoader;
+            config.colorLoader = colorLoader;
             return config;
         }
     }

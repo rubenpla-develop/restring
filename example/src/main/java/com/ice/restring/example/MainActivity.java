@@ -3,6 +3,8 @@ package com.ice.restring.example;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.ice.restring.Restring;
+
 public class MainActivity extends BaseActivity {
 
     @Override
@@ -10,6 +12,6 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ((TextView) findViewById(R.id.text_view2)).setText(R.string.subtitle);
+        ((TextView) findViewById(R.id.text_view2)).setText(R.string.subtitle2);
     }
 }

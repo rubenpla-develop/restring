@@ -14,6 +14,7 @@ public abstract class Restring {
 
     private static boolean isInitialized = false;
     private static StringRepository stringRepository;
+    private static ColorRepository colorRepository;
     private static ViewTransformerManager viewTransformerManager;
 
     /**
@@ -38,6 +39,7 @@ public abstract class Restring {
 
         isInitialized = true;
         initStringRepository(context, config);
+        initColorRepository(context, config);
         initViewTransformer();
     }
 
@@ -88,6 +90,18 @@ public abstract class Restring {
         }
     }
 
+    private static void initColorRepository(Context context, RestringConfig config) {
+        if (config.isPersist()) {
+            colorRepository = new SharedPrefColorRepository(context);
+        } else {
+            colorRepository = new MemoryColorRepository();
+        }
+
+        if (config.getColorLoader() != null) {
+            //Todo loader task
+        }
+    }
+
     private static void initViewTransformer() {
         viewTransformerManager = new ViewTransformerManager();
         viewTransformerManager.registerTransformer(new TextViewTransformer());
@@ -116,5 +130,9 @@ public abstract class Restring {
          * @return the strings as (key, value).
          */
         Map<String, String> getStrings(String language);
+    }
+
+    public interface ColorLoader {
+        Map<String, String> getColors();
     }
 }

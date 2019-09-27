@@ -14,7 +14,7 @@ class RestringResources extends Resources {
 
     private final StringRepository stringRepository;
 
-    RestringResources(@NonNull final Resources res,
+      RestringResources(@NonNull final Resources res,
                       @NonNull final StringRepository stringRepository) {
         super(res.getAssets(), res.getDisplayMetrics(), res.getConfiguration());
         this.stringRepository = stringRepository;

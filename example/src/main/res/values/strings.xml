@@ -2,4 +2,5 @@
     <string name="app_name">Restring</string>
     <string name="title">This is title.</string>
     <string name="subtitle">This is subtitle.</string>
+    <string name="subtitle2">subtitle 2</string>
 </resources>
